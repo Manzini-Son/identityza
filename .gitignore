@@ -1,0 +1,21 @@
+# Compiled binaries
+*.out
+*.exe
+*.o
+*.obj
+main
+identityza
+
+# Build output directory
+output/
+
+# IDE / editor files
+.vscode/
+.qodo/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
