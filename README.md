@@ -79,7 +79,7 @@ Exiting the program. Goodbye!
 
 ## Output & Logging
 
-Whenever a valid ID query is completed, the ID number and parsed information are automatically appended to `id_numbers.txt` in the current working directory:
+Whenever a valid ID query is completed, the ID number and parsed information are automatically appended to `id_numbers.txt` in the current working directory for record keeping:
 
 ```text
 ID Number: 8801235111088
