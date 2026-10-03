@@ -19,3 +19,17 @@ output/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Android build artifacts
+.gradle/
+build/
+*/build/
+local.properties
+*.apk
+*.aab
+.idea/
+*.iml
+
+# Node / Web artifacts
+node_modules/
+.npm/

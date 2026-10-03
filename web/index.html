@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IdentityZA - South African ID Number Validator & Info Checker</title>
+  <meta name="description" content="Free, fast, and privacy-focused South African National ID number validator. Instantly verify Luhn check digit, date of birth, age, gender, and citizenship status client-side.">
+  <meta name="keywords" content="South Africa ID validator, SA ID number check, Luhn algorithm South Africa, verify SA ID, ID number age calculator">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google AdSense SDK Configuration -->
+  <script src="adsense-config.js"></script>
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#" class="brand">
+        <span class="brand-flag">🇿🇦</span>
+        <span class="brand-title">IdentityZA</span>
+        <span class="brand-tag">Validator</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#validator">Validator</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- AD UNIT 1: Top Leaderboard (Responsive Banner) -->
+    <div class="ad-slot-wrapper">
+      <span class="ad-label">Advertisement</span>
+      <!-- Google AdSense Live Unit -->
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <!-- Preview Placeholder (active when in development / preview mode) -->
+      <div class="ad-preview-banner">
+        <strong>Google AdSense Top Leaderboard Banner</strong>
+        <span>Slot: Responsive Auto Banner (728x90 / 320x50 on mobile)</span>
+      </div>
+    </div>
+
+    <!-- Main Tool Section -->
+    <section id="validator" class="hero-card">
+      <div class="hero-header">
+        <h1>South African ID Number Validator</h1>
+        <p>Instantly extract date of birth, age, gender, citizenship, and verify the official Luhn checksum.</p>
+      </div>
+
+      <form id="validator-form" class="validator-form" novalidate>
+        <div class="form-group">
+          <label for="id-input" class="input-label">Enter 13-Digit South African ID Number</label>
+          <span id="id-hint" class="input-hint">Format: YYMMDDSSSSCAZ (e.g., 8801235111088)</span>
+          
+          <div class="input-box-wrapper">
+            <input
+              type="text"
+              id="id-input"
+              name="id_number"
+              class="id-input"
+              placeholder="e.g. 8801235111088"
+              maxlength="13"
+              inputmode="numeric"
+              pattern="[0-9]{13}"
+              required
+              autocomplete="off"
+              aria-describedby="id-hint"
+              aria-errormessage="id-error"
+            />
+          </div>
+          <div id="id-error" class="input-error-msg" role="alert"></div>
+
+          <!-- Sample Pre-fills for Quick Testing -->
+          <div class="sample-presets">
+            <span class="sample-label">Try sample:</span>
+            <button type="button" class="preset-pill" data-sample-id="8801235111088">Sample 1 (Male, Citizen)</button>
+            <button type="button" class="preset-pill" data-sample-id="8411025333080">Sample 2 (Male, Citizen)</button>
+            <button type="button" class="preset-pill" data-sample-id="9506150123087">Sample 3 (Female)</button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Validate ID Number</button>
+          <button type="reset" class="btn-secondary">Clear</button>
+        </div>
+      </form>
+
+      <!-- Result Card (Populated by JS) -->
+      <div id="result-card" class="result-card" style="display: none;" aria-live="polite">
+        <div class="result-card-header">
+          <span id="result-badge" class="status-badge status-valid">Valid SA ID</span>
+          <button id="copy-btn" class="btn-copy">Copy Details</button>
+        </div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="result-key">Date of Birth</div>
+            <div id="res-dob" class="result-value">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-key">Computed Age</div>
+            <div id="res-age" class="result-value">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-key">Gender</div>
+            <div id="res-gender" class="result-value">-</div>
+          </div>
+          <div class="result-item">
+            <div class="result-key">Citizenship Status</div>
+            <div id="res-citizenship" class="result-value">-</div>
+          </div>
+          <div class="result-item" style="grid-column: 1 / -1;">
+            <div class="result-key">Luhn Checksum Verification</div>
+            <div id="res-luhn" class="result-value">-</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Local Query History -->
+      <div class="history-section">
+        <div class="history-header">
+          <span class="history-title">Recent Validations in this Session</span>
+          <button id="clear-history-btn" class="btn-text-sm" style="display: none;">Clear</button>
+        </div>
+        <ul id="history-list" class="history-list">
+          <li class="history-empty">No recent queries.</li>
+        </ul>
+      </div>
+
+      <!-- Browser-Only Privacy Guarantee -->
+      <div id="privacy" class="privacy-banner">
+        <div class="privacy-banner-icon">🔒</div>
+        <div class="privacy-banner-content">
+          <h3>100% Private & Client-Side</h3>
+          <p>Your ID number never leaves your device. All calculations, dates, and checksums are executed locally in your browser with zero server transmission.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AD UNIT 2: Mid-Content (In-Article / Responsive Banner) -->
+    <div class="ad-slot-wrapper">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="2345678901"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <div class="ad-preview-banner">
+        <strong>Google AdSense Mid-Content Unit</strong>
+        <span>Slot: Responsive In-Feed / Display Unit</span>
+      </div>
+    </div>
+
+    <!-- Educational Content (High Value Content for SEO & AdSense Approval) -->
+    <section id="how-it-works" class="info-section">
+      <article class="card">
+        <h2>Understanding South African ID Numbers</h2>
+        <p>A South African National Identity number is a 13-digit numeric code formatted as <code>YYMMDD SSSS C A Z</code>. Each segment encodes specific biographical and verification data:</p>
+        
+        <div class="table-wrapper">
+          <table class="info-table">
+            <thead>
+              <tr>
+                <th>Segment</th>
+                <th>Field Name</th>
+                <th>Definition & Value Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>1–6</code> (YYMMDD)</td>
+                <td>Date of Birth</td>
+                <td>2 digits each for Year, Month, and Day. Supports 1900s and 2000s centurial resolution.</td>
+              </tr>
+              <tr>
+                <td><code>7–10</code> (SSSS)</td>
+                <td>Gender Sequence</td>
+                <td><code>0000–4999</code> indicates Female; <code>5000–9999</code> indicates Male.</td>
+              </tr>
+              <tr>
+                <td><code>11</code> (C)</td>
+                <td>Citizenship</td>
+                <td><code>0</code> denotes a South African Citizen; <code>1</code> denotes a Permanent Resident.</td>
+              </tr>
+              <tr>
+                <td><code>12</code> (A)</td>
+                <td>Index Digit</td>
+                <td>Historical racial index, formerly used by DHA, now standardized as <code>8</code> or <code>9</code>.</td>
+              </tr>
+              <tr>
+                <td><code>13</code> (Z)</td>
+                <td>Check Digit</td>
+                <td>Verification checksum calculated using the Luhn Algorithm.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>How the Luhn Algorithm Validates South African IDs</h2>
+        <p>The Luhn algorithm (also known as the "modulus 10" formula) detects accidental transcription errors and typos:</p>
+        <ol style="margin-left: 1.5rem; color: #334155; line-height: 1.8;">
+          <li>Sum all digits in odd positions (1st, 3rd, 5th, 7th, 9th, 11th, and 13th).</li>
+          <li>Concatenate all digits in even positions (2nd, 4th, 6th, 8th, 10th, and 12th) to form a single integer.</li>
+          <li>Multiply this concatenated number by 2.</li>
+          <li>Sum the individual digits of the resulting product.</li>
+          <li>Add the two sums together. If the total is a multiple of 10 (total mod 10 = 0), the ID number is mathematically valid.</li>
+        </ol>
+      </article>
+
+      <article id="faq" class="card">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3 class="faq-question">Does a valid checksum mean the person is currently alive?</h3>
+            <p class="faq-answer">No. Checksum validation proves structural and algorithmic validity according to the official South African specification. To verify marital status, alive status, or Home Affairs records, a direct government DHA or certified credit bureau integration is required.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Is my ID number saved anywhere?</h3>
+            <p class="faq-answer">No. IdentityZA executes 100% inside your web browser using JavaScript. No ID numbers are transmitted to our servers or stored in any remote database.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Can this tool be integrated into signup forms?</h3>
+            <p class="faq-answer">Yes! You can use our lightweight client-side JavaScript engine or the standalone C++ CLI application for backend KYC and validation checks.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- AD UNIT 3: Bottom Banner (Responsive Display Unit) -->
+    <div class="ad-slot-wrapper">
+      <span class="ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+           data-ad-slot="3456789012"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <div class="ad-preview-banner">
+        <strong>Google AdSense Bottom Banner</strong>
+        <span>Slot: Responsive Horizontal Display Unit</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4>IdentityZA</h4>
+          <p>An open-source South African National Identity validation tool designed for accuracy, speed, and privacy.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#how-it-works">ID Number Structure</a></li>
+            <li><a href="#faq">Frequently Asked Questions</a></li>
+            <li><a href="ads.txt">AdSense ads.txt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal & Disclaimer</h4>
+          <p>IdentityZA is an independent open-source utility and is not affiliated, endorsed, or connected with the South African Department of Home Affairs (DHA) or any government entity.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 IdentityZA. Built with standard C++ and modern web standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
