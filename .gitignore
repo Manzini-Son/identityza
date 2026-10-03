@@ -33,3 +33,5 @@ local.properties
 # Node / Web artifacts
 node_modules/
 .npm/
+.vercel
+.env*
