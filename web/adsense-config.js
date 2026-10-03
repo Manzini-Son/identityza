@@ -16,8 +16,8 @@ window.ADSENSE_CONFIG = {
 
   // Specific ad slot IDs created in your AdSense console (Ads -> By ad unit)
   slots: {
-    topLeaderboard: "1234567890", // Responsive Horizontal Banner (Header)
-    inContent: "2345678901",      // Responsive In-Feed / Display Unit (Mid-page)
-    bottomBanner: "3456789012"    // Responsive Banner (Footer)
+    topLeaderboard: "4501250656", // Responsive Horizontal Banner (Header)
+    inContent: "6935842309",      // Responsive In-Feed / Display Unit (Mid-page)
+    bottomBanner: "1156153581"    // Responsive Banner (Footer)
   }
 };
