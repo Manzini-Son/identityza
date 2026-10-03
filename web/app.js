@@ -163,34 +163,55 @@ function initAdSense() {
     adUnits.forEach(unit => {
       unit.style.display = 'none';
     });
-    console.info('identityza: Running in AdSense Preview Mode. Replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID in adsense-config.js to serve live ads.');
+    console.info('identityza: Running in AdSense Preview Mode. Set previewMode: false in adsense-config.js to serve live ads.');
   } else {
-    // Production Mode: Load real Google AdSense SDK
+    // Production Mode: Display live Google AdSense ad units
     previewBanners.forEach(banner => {
       banner.style.display = 'none';
     });
+
     adUnits.forEach(unit => {
       unit.style.display = 'block';
+
+      // Ensure client ID matches configuration
+      if (config.publisherId) {
+        unit.setAttribute('data-ad-client', config.publisherId);
+      }
+
+      // Map ad slot from config if configured
+      const slotName = unit.getAttribute('data-slot-name');
+      if (slotName && config.slots && config.slots[slotName]) {
+        unit.setAttribute('data-ad-slot', config.slots[slotName]);
+      }
     });
 
-    const script = document.createElement('script');
-    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(config.publisherId)}`;
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-    document.head.appendChild(script);
+    // Ensure AdSense library is present in document head
+    const existingScript = document.querySelector('script[src*="adsbygoogle.js"]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(config.publisherId)}`;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      document.head.appendChild(script);
 
-    // Initialize adsbygoogle queue
-    script.onload = () => {
-      try {
-        const adSlots = document.querySelectorAll('.adsbygoogle');
-        adSlots.forEach(() => {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        });
-      } catch (err) {
-        console.error('AdSense initialization error:', err);
-      }
-    };
+      script.onload = () => pushAdUnits(adUnits);
+    } else {
+      pushAdUnits(adUnits);
+    }
   }
+}
+
+function pushAdUnits(adUnits) {
+  adUnits.forEach(unit => {
+    // Only push if the unit hasn't already been processed by Google
+    if (!unit.getAttribute('data-adsbygoogle-status')) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (err) {
+        console.error('AdSense push error:', err);
+      }
+    }
+  });
 }
 
 // --- UI Interaction & DOM Setup ---

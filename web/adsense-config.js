@@ -8,11 +8,11 @@
 window.ADSENSE_CONFIG = {
   // Set to true to show styled preview placeholders when running locally or during development.
   // Set to false once your real Google AdSense account and ad units are approved.
-  previewMode: true,
+  previewMode: false,
 
   // Your Google AdSense Publisher ID (format: ca-pub-XXXXXXXXXXXXXXXX)
   // Found in your AdSense console -> Account -> Settings -> Account information
-  publisherId: "ca-pub-XXXXXXXXXXXXXXXX",
+  publisherId: "ca-pub-6548527919306016",
 
   // Specific ad slot IDs created in your AdSense console (Ads -> By ad unit)
   slots: {
