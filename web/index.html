@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IdentityZA - South African ID Number Validator & Info Checker</title>
-  <meta name="description" content="Free, fast, and privacy-focused South African National ID number validator. Instantly verify Luhn check digit, date of birth, age, gender, and citizenship status client-side.">
-  <meta name="keywords" content="South Africa ID validator, SA ID number check, Luhn algorithm South Africa, verify SA ID, ID number age calculator">
+  <title>IdentityZA - South African ID Number Validator & Verification Guide</title>
+  <meta name="description" content="Free, fast, and privacy-focused South African National ID number validator. Verify Luhn checksum, date of birth, age, gender, and citizenship client-side with complete technical documentation.">
+  <meta name="keywords" content="South Africa ID validator, SA ID number check, Luhn algorithm South Africa, verify SA ID, ID number age calculator, Department of Home Affairs ID format, SAFPS identity theft protection">
   <link rel="stylesheet" href="style.css">
 
   <!-- Google AdSense Configuration & SDK -->
@@ -18,45 +18,29 @@
   <!-- Site Navigation -->
   <header class="site-header">
     <div class="header-container">
-      <a href="#" class="brand">
+      <a href="index.html" class="brand">
         <span class="brand-flag">🇿🇦</span>
         <span class="brand-title">IdentityZA</span>
         <span class="brand-tag">Validator</span>
       </a>
       <nav class="nav-links">
         <a href="#validator">Validator</a>
-        <a href="#how-it-works">How It Works</a>
+        <a href="#how-it-works">ID Structure</a>
+        <a href="#luhn-algorithm">Luhn Algorithm</a>
+        <a href="#security-guide">Security Guide</a>
+        <a href="about.html">About</a>
         <a href="#faq">FAQ</a>
-        <a href="#privacy">Privacy</a>
       </nav>
     </div>
   </header>
 
   <main class="main-content">
 
-    <!-- AD UNIT 1: Top Leaderboard (Responsive Banner) -->
-    <div class="ad-slot-wrapper">
-      <span class="ad-label">Advertisement</span>
-      <!-- Google AdSense Live Unit -->
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-slot-name="topLeaderboard"
-           data-ad-client="ca-pub-6548527919306016"
-           data-ad-slot="4501250656"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <!-- Preview Placeholder (active when in development / preview mode) -->
-      <div class="ad-preview-banner">
-        <strong>Google AdSense Top Leaderboard Banner</strong>
-        <span>Slot: Responsive Auto Banner (728x90 / 320x50 on mobile)</span>
-      </div>
-    </div>
-
-    <!-- Main Tool Section -->
+    <!-- Main Tool Section (Hero Above-The-Fold with Content First) -->
     <section id="validator" class="hero-card">
       <div class="hero-header">
-        <h1>South African ID Number Validator</h1>
-        <p>Instantly extract date of birth, age, gender, citizenship, and verify the official Luhn checksum.</p>
+        <h1>South African ID Number Validator & Verification Guide</h1>
+        <p>Instantly extract date of birth, age, gender, citizenship, and verify the official Luhn checksum—executed 100% privately in your browser.</p>
       </div>
 
       <form id="validator-form" class="validator-form" novalidate>
@@ -134,7 +118,7 @@
           <button id="clear-history-btn" class="btn-text-sm" style="display: none;">Clear</button>
         </div>
         <ul id="history-list" class="history-list">
-          <li class="history-empty">No recent queries.</li>
+          <li class="history-empty">No recent queries in this browser session.</li>
         </ul>
       </div>
 
@@ -143,105 +127,229 @@
         <div class="privacy-banner-icon">🔒</div>
         <div class="privacy-banner-content">
           <h3>100% Private & Client-Side</h3>
-          <p>Your ID number never leaves your device. All calculations, dates, and checksums are executed locally in your browser with zero server transmission.</p>
+          <p>Your ID number never leaves your device. All calculations, dates, and checksums are executed locally in your browser with zero server transmission. Read our complete <a href="privacy.html">Privacy Policy</a>.</p>
         </div>
       </div>
     </section>
 
-    <!-- AD UNIT 2: Mid-Content (In-Article / Responsive Banner) -->
-    <div class="ad-slot-wrapper">
-      <span class="ad-label">Advertisement</span>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-slot-name="inContent"
-           data-ad-client="ca-pub-6548527919306016"
-           data-ad-slot="6935842309"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <div class="ad-preview-banner">
-        <strong>Google AdSense Mid-Content Unit</strong>
-        <span>Slot: Responsive In-Feed / Display Unit</span>
-      </div>
-    </div>
+    <!-- Comprehensive Educational Documentation Section -->
+    <div class="guide-section">
 
-    <!-- Educational Content (High Value Content for SEO & AdSense Approval) -->
-    <section id="how-it-works" class="info-section">
-      <article class="card">
-        <h2>Understanding South African ID Numbers</h2>
-        <p>A South African National Identity number is a 13-digit numeric code formatted as <code>YYMMDD SSSS C A Z</code>. Each segment encodes specific biographical and verification data:</p>
+      <!-- Guide 1: Understanding South African ID Structure -->
+      <article id="how-it-works" class="article-card">
+        <h2>Understanding the 13-Digit South African ID Number</h2>
+        <p>A South African National Identity number is a 13-digit numeric code assigned to citizens and permanent residents by the Department of Home Affairs (DHA). Structured under the standard format <code>YYMMDD SSSS C A Z</code>, each digit segment represents critical biographical and verification data.</p>
         
         <div class="table-wrapper">
           <table class="info-table">
             <thead>
               <tr>
-                <th>Segment</th>
+                <th>Position</th>
+                <th>Segment Code</th>
                 <th>Field Name</th>
-                <th>Definition & Value Meaning</th>
+                <th>Detailed Meaning & Valid Ranges</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><code>1–6</code> (YYMMDD)</td>
+                <td>Digits 1–6</td>
+                <td><code>YYMMDD</code></td>
                 <td>Date of Birth</td>
-                <td>2 digits each for Year, Month, and Day. Supports 1900s and 2000s centurial resolution.</td>
+                <td>Specifies the year, month, and day of birth. Requires calendar validation (accounting for leap years, 30/31-day months, and February 28/29).</td>
               </tr>
               <tr>
-                <td><code>7–10</code> (SSSS)</td>
+                <td>Digits 7–10</td>
+                <td><code>SSSS</code></td>
                 <td>Gender Sequence</td>
-                <td><code>0000–4999</code> indicates Female; <code>5000–9999</code> indicates Male.</td>
+                <td>Defines legal gender at birth. Range <code>0000–4999</code> denotes Female; Range <code>5000–9999</code> denotes Male.</td>
               </tr>
               <tr>
-                <td><code>11</code> (C)</td>
-                <td>Citizenship</td>
-                <td><code>0</code> denotes a South African Citizen; <code>1</code> denotes a Permanent Resident.</td>
+                <td>Digit 11</td>
+                <td><code>C</code></td>
+                <td>Citizenship Status</td>
+                <td>Denotes nationality status: <code>0</code> indicates a South African citizen by birth or naturalization; <code>1</code> indicates a Permanent Resident.</td>
               </tr>
               <tr>
-                <td><code>12</code> (A)</td>
-                <td>Index Digit</td>
-                <td>Historical racial index, formerly used by DHA, now standardized as <code>8</code> or <code>9</code>.</td>
+                <td>Digit 12</td>
+                <td><code>A</code></td>
+                <td>Historical Index</td>
+                <td>Originally used for population registry classification prior to 1994. Under modern DHA standards, it is standardized as <code>8</code> or <code>9</code>.</td>
               </tr>
               <tr>
-                <td><code>13</code> (Z)</td>
-                <td>Check Digit</td>
-                <td>Verification checksum calculated using the Luhn Algorithm.</td>
+                <td>Digit 13</td>
+                <td><code>Z</code></td>
+                <td>Luhn Check Digit</td>
+                <td>A mathematical checksum digit computed via the Luhn Algorithm (Mod 10) to detect typographical and transcription errors.</td>
               </tr>
             </tbody>
           </table>
         </div>
+
+        <h3>Centurial Ambiguity in the Birth Date (YY)</h3>
+        <p>Because the South African ID number format allocates only two digits to the birth year (<code>YY</code>), software systems must resolve century ambiguity (whether a person was born in the 1900s or the 2000s). For example, an ID beginning with <code>05</code> could belong to someone born in 1905 (aged 121) or in 2005 (aged 21).</p>
+        <p>Modern verification software handles this through a rolling century threshold: if the two-digit year is greater than the current year's two-digit value (e.g., <code>&gt; 26</code>), the century is resolved as <code>1900 + YY</code>; otherwise, it is resolved as <code>2000 + YY</code>.</p>
       </article>
 
-      <article class="card">
-        <h2>How the Luhn Algorithm Validates South African IDs</h2>
-        <p>The Luhn algorithm (also known as the "modulus 10" formula) detects accidental transcription errors and typos:</p>
-        <ol style="margin-left: 1.5rem; color: #334155; line-height: 1.8;">
-          <li>Sum all digits in odd positions (1st, 3rd, 5th, 7th, 9th, 11th, and 13th).</li>
-          <li>Concatenate all digits in even positions (2nd, 4th, 6th, 8th, 10th, and 12th) to form a single integer.</li>
-          <li>Multiply this concatenated number by 2.</li>
-          <li>Sum the individual digits of the resulting product.</li>
-          <li>Add the two sums together. If the total is a multiple of 10 (total mod 10 = 0), the ID number is mathematically valid.</li>
+      <!-- Guide 2: Mathematics of the Luhn Algorithm -->
+      <article id="luhn-algorithm" class="article-card">
+        <h2>The Mathematics of the Luhn Checksum Algorithm</h2>
+        <p>The Luhn algorithm, also known as the <strong>Modulus 10 (Mod 10)</strong> formula, is a checksum formula developed by IBM scientist Hans Peter Luhn in 1954 and patented in 1960. It is globally recognized as the cornerstone of credit card validation (ISO/IEC 7812) and national identity verification systems.</p>
+        <p>The primary purpose of the Luhn algorithm is not cryptographic security, but error prevention: it reliably detects 100% of single-digit typing mistakes and virtually all adjacent digit transpositions (e.g., entering <code>12</code> instead of <code>21</code>).</p>
+
+        <h3>Step-by-Step Calculation for South African IDs</h3>
+        <p>The South African implementation calculates the checksum using the first 12 digits to verify that the final 13th digit (<code>Z</code>) satisfies the Modulo 10 condition:</p>
+
+        <ol>
+          <li><strong>Sum digits in odd positions:</strong> Sum digits at indices 1, 3, 5, 7, 9, 11, and 13 (1-based index). Let this sum be <code>A</code>.</li>
+          <li><strong>Concatenate and double digits in even positions:</strong> Extract digits at indices 2, 4, 6, 8, 10, and 12 to form a 6-digit integer. Multiply this entire number by 2.</li>
+          <li><strong>Sum the digits of the doubled product:</strong> Add each individual digit of the resulting number together. Let this sum be <code>B</code>.</li>
+          <li><strong>Compute total sum:</strong> Add both components: <code>Total = A + B</code>.</li>
+          <li><strong>Evaluate Modulo 10:</strong> If <code>Total % 10 === 0</code>, the identity number is mathematically valid.</li>
         </ol>
+
+        <div class="math-walkthrough">
+          <strong>Worked Example: Validating Sample ID 880123 5111 08 8</strong><br><br>
+          1. Odd Digits:  8 + 0 + 2 + 5 + 1 + 0 + 8 = 24<br>
+          2. Even Digits: "813118" -> 813,118 × 2 = 1,626,236<br>
+          3. Sum of Product Digits: 1 + 6 + 2 + 6 + 2 + 3 + 6 = 26<br>
+          4. Total Sum: 24 + 26 = 50<br>
+          5. Checksum Verification: 50 % 10 = 0 -> VALID!
+        </div>
+
+        <h3>C++ & JavaScript Reference Implementation</h3>
+        <p>Software developers integrating South African ID validation into client-side onboarding forms or backend KYC pipelines can refer to the core algorithmic routine below:</p>
+
+        <div class="code-block">
+// Algorithmic validation routine (JavaScript / C++)
+function verifyLuhnChecksum(idStr) {
+  let oddSum = 0;
+  let evenDigitsStr = '';
+  
+  for (let i = 0; i &lt; 13; i++) {
+    if (i % 2 === 0) {
+      oddSum += parseInt(idStr[i], 10);
+    } else {
+      evenDigitsStr += idStr[i];
+    }
+  }
+  
+  const doubled = parseInt(evenDigitsStr, 10) * 2;
+  const doubledDigitsSum = String(doubled)
+    .split('')
+    .reduce((sum, d) =&gt; sum + parseInt(d, 10), 0);
+    
+  return (oddSum + doubledDigitsSum) % 10 === 0;
+}
+        </div>
       </article>
 
-      <article id="faq" class="card">
+      <!-- Guide 3: DHA Official Verification vs Algorithmic Validation -->
+      <article id="dha-verification" class="article-card">
+        <h2>Department of Home Affairs (DHA) Verification vs Algorithmic Check</h2>
+        <p>A vital distinction that all individuals, HR managers, and fintech compliance officers must recognize is the difference between <strong>syntactic validation</strong> and <strong>authoritative government verification</strong>.</p>
+        
+        <div class="grid-two">
+          <div class="grid-card">
+            <h4>What IdentityZA Validates</h4>
+            <ul>
+              <li>Exact 13-digit numeric structure</li>
+              <li>Valid calendar date of birth (leap years, month days)</li>
+              <li>Valid gender sequence range (0000–9999)</li>
+              <li>Recognized citizenship flag (0 or 1)</li>
+              <li>Official Luhn Modulo 10 check digit match</li>
+            </ul>
+          </div>
+          <div class="grid-card">
+            <h4>What Requires Official DHA Database Access</h4>
+            <ul>
+              <li>Confirming whether the ID belongs to a living or deceased person</li>
+              <li>Verifying legal first names, surnames, and maiden names</li>
+              <li>Confirming marital status and marriage certificates</li>
+              <li>Biometric fingerprint and facial recognition match</li>
+              <li>Detecting fraudulent duplicate IDs issued by corrupt actors</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout-box callout-info">
+          <h4>🏛️ The HANIS & ABIS Infrastructure</h4>
+          <p>The Department of Home Affairs manages the Home Affairs National Identification System (HANIS) and Automated Biometric Identification System (ABIS). These databases house millions of fingerprint, palm-print, and facial images. Only authorized credit bureaus, registered financial institutions, and government departments have direct real-time API integrations into these registries.</p>
+        </div>
+      </article>
+
+      <!-- Guide 4: Identity Security & Fraud Prevention Guide for South Africans -->
+      <article id="security-guide" class="article-card">
+        <h2>South African Identity Security & Fraud Prevention Guide</h2>
+        <p>Identity theft is one of the fastest-growing financial crimes in South Africa. Criminal syndicates frequently use compromised 13-digit identity numbers in conjunction with leaked personal information to commit SIM swaps, open fraudulent retail and store accounts, apply for personal loans, and redirect pension or SASSA grant payouts.</p>
+
+        <h3>5 Golden Rules to Protect Your South African ID Number</h3>
+        <ol>
+          <li><strong>Never share your ID number on unencrypted public channels:</strong> Avoid sending photos of your Green ID Book or Smart ID Card over unverified WhatsApp numbers, public forums, or insecure email attachments.</li>
+          <li><strong>Scrutinize requests for certified ID copies:</strong> Under the Protection of Personal Information Act (POPIA), institutions may only collect your ID number if it is strictly necessary for a legally defined business purpose (e.g., FICA or RICA compliance). Ask why the document is needed and how long it will be retained.</li>
+          <li><strong>Watermark electronic copies of your ID:</strong> When submitting an ID copy for legitimate transactions (such as property rentals or job applications), write a semi-transparent watermark across the face of the document: <em>"FOR APPLICATION PURPOSES ONLY - [DATE]"</em>. This prevents criminals from reusing the scan.</li>
+          <li><strong>Monitor your credit report at least twice a year:</strong> Under South African law, every citizen is entitled to one free credit report per year from each major credit bureau (TransUnion, Experian, XDS, and Compuscan). Review your active accounts and enquiries regularly.</li>
+          <li><strong>Register for free with the SAFPS:</strong> If you suspect your ID number has been compromised or leaked in a corporate data breach, register for free protective registration with the Southern African Fraud Prevention Service (SAFPS).</li>
+        </ol>
+
+        <div class="callout-box callout-warning">
+          <h4>🚨 What to Do Immediately If Your ID Is Stolen or Compromised</h4>
+          <p>1. Report the theft to the South African Police Service (SAPS) and obtain a stamped official police case number / affidavit.<br>
+          2. Contact the SAFPS on <strong>011 867 2234</strong> or visit <a href="https://www.safps.org.za" target="_blank" rel="noopener noreferrer">safps.org.za</a> to file a Protective Registration alert on your identity.<br>
+          3. Notify the fraud departments of your banking institutions immediately to place biometric security flags on your accounts.<br>
+          4. Apply for a replacement Smart ID Card at your nearest Department of Home Affairs branch or supported participating bank branch.</p>
+        </div>
+      </article>
+
+      <!-- Frequently Asked Questions -->
+      <article id="faq" class="article-card">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-list">
           <div class="faq-item">
-            <h3 class="faq-question">Does a valid checksum mean the person is currently alive?</h3>
-            <p class="faq-answer">No. Checksum validation proves structural and algorithmic validity according to the official South African specification. To verify marital status, alive status, or Home Affairs records, a direct government DHA or certified credit bureau integration is required.</p>
+            <h3 class="faq-question">What does it mean if an ID number passes the Luhn checksum?</h3>
+            <p class="faq-answer">Passing the Luhn check digit verification means that the 13-digit number is mathematically and structurally valid according to official South African formatting rules. It confirms there are no accidental typos or transcription errors in the sequence.</p>
           </div>
           <div class="faq-item">
-            <h3 class="faq-question">Is my ID number saved anywhere?</h3>
-            <p class="faq-answer">No. IdentityZA executes 100% inside your web browser using JavaScript. No ID numbers are transmitted to our servers or stored in any remote database.</p>
+            <h3 class="faq-question">Does a valid checksum prove the person is alive?</h3>
+            <p class="faq-answer">No. Checksum validation only proves mathematical validity. To verify whether an individual is living or deceased, certified Home Affairs (DHA) population registry records or registered credit bureau checks are legally required.</p>
           </div>
           <div class="faq-item">
-            <h3 class="faq-question">Can this tool be integrated into signup forms?</h3>
-            <p class="faq-answer">Yes! You can use our lightweight client-side JavaScript engine or the standalone C++ CLI application for backend KYC and validation checks.</p>
+            <h3 class="faq-question">Is my ID number saved, recorded, or sent to a server?</h3>
+            <p class="faq-answer">No. IdentityZA executes 100% locally in your web browser. Zero identity numbers are transmitted to our servers or stored in any remote database. You can review our full commitment in our <a href="privacy.html">Privacy Policy</a>.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">What is the difference between Citizenship 0 and 1?</h3>
+            <p class="faq-answer">Digit 11 denotes citizenship: 0 indicates that the holder is a South African Citizen (by birth or naturalization), while 1 indicates that the holder is a foreign national who has been granted Permanent Residency by the Department of Home Affairs.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Why does the 12th digit exist if apartheid was abolished?</h3>
+            <p class="faq-answer">Prior to 1994, the 12th digit was used for racial classification under apartheid-era population registers. Following democratic transition, the Department of Home Affairs standardized this digit to 8 or 9 for all citizens to eliminate discriminatory classification while preserving compatibility with legacy computerized banking and government systems.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Why does my ID number fail validation?</h3>
+            <p class="faq-answer">A failure typically occurs due to one of three reasons: (1) an invalid calendar date (e.g. month 13 or February 31), (2) a typing mistake that throws off the Luhn check digit, or (3) an incorrectly issued or unofficial identity number.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Can I use IdentityZA's validation code in my company's software?</h3>
+            <p class="faq-answer">Yes! IdentityZA is open-source under the MIT License. You are free to incorporate our C++ logic or client-side JavaScript engine into customer sign-up forms, KYC pipelines, and internal tools.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">How does IdentityZA resolve the 1900 vs 2000 birth year ambiguity?</h3>
+            <p class="faq-answer">Because only two digits represent the year, our engine uses a dynamic century threshold based on the current calendar year. If the two-digit year is greater than the current year's two-digit value (e.g., > 26), the century is calculated as 1900; otherwise, it is calculated as 2000.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">Where can I resolve a duplicate or fraudulent ID number?</h3>
+            <p class="faq-answer">If you suspect your ID number has been duplicated or assigned to another individual by mistake, you must report directly to a Department of Home Affairs regional office for biometric investigation and rectification.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-question">What is SAFPS and how does it protect South Africans?</h3>
+            <p class="faq-answer">The Southern African Fraud Prevention Service (SAFPS) is a non-profit organization that maintains a shared fraud prevention database for South African banks, retailers, and insurers. Registering for free protective registration alerts credit providers to conduct extra verification before approving new accounts under your name.</p>
           </div>
         </div>
       </article>
-    </section>
 
-    <!-- AD UNIT 3: Bottom Banner (Responsive Display Unit) -->
+    </div>
+
+    <!-- SINGLE POLICY-COMPLIANT AD UNIT: Bottom of Content Banner -->
     <div class="ad-slot-wrapper">
       <span class="ad-label">Advertisement</span>
       <ins class="adsbygoogle"
@@ -252,8 +360,8 @@
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <div class="ad-preview-banner">
-        <strong>Google AdSense Bottom Banner</strong>
-        <span>Slot: Responsive Horizontal Display Unit</span>
+        <strong>Google AdSense Display Unit</strong>
+        <span>Slot: Responsive Banner (Policy-Compliant Bottom Placement)</span>
       </div>
     </div>
 
@@ -265,22 +373,34 @@
       <div class="footer-top">
         <div class="footer-col">
           <h4>IdentityZA</h4>
-          <p>An open-source South African National Identity validation tool designed for accuracy, speed, and privacy.</p>
+          <p>An open-source South African National Identity validation tool and comprehensive knowledge resource designed for accuracy, speed, and 100% client-side privacy.</p>
         </div>
         <div class="footer-col">
-          <h4>Resources</h4>
+          <h4>Tools & Guides</h4>
           <ul>
+            <li><a href="#validator">ID Validator Tool</a></li>
             <li><a href="#how-it-works">ID Number Structure</a></li>
-            <li><a href="#faq">Frequently Asked Questions</a></li>
+            <li><a href="#luhn-algorithm">Luhn Algorithm Guide</a></li>
+            <li><a href="#security-guide">ID Security & Fraud</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Legal & Disclaimer</h4>
-          <p>IdentityZA is an independent open-source utility and is not affiliated, endorsed, or connected with the South African Department of Home Affairs (DHA) or any government entity.</p>
+          <h4>Trust & Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="about.html">About the Project</a></li>
+            <li><a href="contact.html">Contact & Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Official Disclaimer</h4>
+          <p>IdentityZA is an independent open-source utility and is not affiliated, endorsed, or connected with the South African Department of Home Affairs (DHA) or any government agency.</p>
         </div>
       </div>
       <div class="footer-bottom">
         <p>© 2026 IdentityZA. Built with standard C++ and modern web standards.</p>
+        <p><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a></p>
       </div>
     </div>
   </footer>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - IdentityZA Project</title>
+  <meta name="description" content="Learn about IdentityZA: an open-source initiative providing high-performance South African ID validation, Luhn algorithm verification, and developer resources.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Site Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand">
+        <span class="brand-flag">🇿🇦</span>
+        <span class="brand-title">IdentityZA</span>
+        <span class="brand-tag">Validator</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#validator">Validator</a>
+        <a href="index.html#how-it-works">ID Structure</a>
+        <a href="index.html#luhn-algorithm">Luhn Algorithm</a>
+        <a href="index.html#security-guide">Security Guide</a>
+        <a href="about.html">About</a>
+        <a href="index.html#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="page-hero">
+      <h1>About IdentityZA</h1>
+      <p>Building high-performance, privacy-first identity validation tools and educational documentation for South Africa.</p>
+    </div>
+
+    <article class="page-body">
+      <h2>Our Mission & Origin</h2>
+      <p>IdentityZA began as an open-source systems programming initiative created in modern C++ to solve a critical, everyday technical challenge in South Africa: <strong>how to reliably, accurately, and securely validate 13-digit South African National Identity numbers</strong> without relying on sluggish external APIs or exposing citizen identity numbers to untrusted remote networks.</p>
+      <p>In South Africa, National ID numbers are the universal backbone of digital identity, used in banking, retail accounts, cell phone contracts (RICA), employment verification, and government registrations. However, many existing web forms and verification tools transmit sensitive ID numbers across third-party backend servers, creating unnecessary cybersecurity vulnerabilities and privacy risks under the Protection of Personal Information Act (POPIA).</p>
+
+      <h2>The Architecture: Privacy-First Engineering</h2>
+      <p>IdentityZA is built with a dual-tier architecture:</p>
+      <div class="grid-two">
+        <div class="grid-card">
+          <h4>1. High-Performance C++ Core</h4>
+          <p>A native C++ validation suite designed for automated backend batch processing, enterprise KYC pipelines, and high-frequency verification with zero external dependencies and sub-microsecond execution times.</p>
+        </div>
+        <div class="grid-card">
+          <h4>2. Zero-Transmission Web Engine</h4>
+          <p>A lightweight, browser-based web application that executes the complete Luhn checksum, date verification, and demographic extraction purely on the client's device using vanilla JavaScript and modern CSS standards.</p>
+        </div>
+      </div>
+
+      <h2>Who We Serve</h2>
+      <ul>
+        <li><strong>Everyday Citizens:</strong> Individuals who want to verify the validity of their ID number, check whether their checksum matches official DHA specifications, or calculate their exact age and biographical data.</li>
+        <li><strong>Software Developers & Fintechs:</strong> Programmers building onboarding funnels, e-commerce checkouts, and customer sign-up forms who require reference implementations, mathematical documentation, and algorithmic guides for the South African Luhn variation.</li>
+        <li><strong>Human Resources & Compliance Officers:</strong> Teams needing an instant, zero-cost, private method to sanity-check prospective employee identification documents before proceeding to formal biometric screening.</li>
+      </ul>
+
+      <h2>Open Source & Community</h2>
+      <p>We believe in the power of open-source software to elevate security standards across the South African digital economy. The entire source code for IdentityZA—including the command-line C++ tool and the web application—is hosted publicly on GitHub and distributed under the permissive MIT License.</p>
+      <p>Developers are encouraged to review the code, fork the repository, suggest algorithmic improvements, or integrate the validation logic into their own internal systems.</p>
+
+      <div class="callout-box callout-info">
+        <h4>📦 Open Source Repository</h4>
+        <p>Explore the full source code, test suites, and documentation on our official GitHub page: <a href="https://github.com/Manzini-Son/identityza" target="_blank" rel="noopener noreferrer">https://github.com/Manzini-Son/identityza</a>.</p>
+      </div>
+
+      <h2>Important Governmental Non-Affiliation Disclaimer</h2>
+      <p>IdentityZA is an independent, community-driven software project. <strong>IdentityZA is not affiliated with, authorized by, sponsored by, or in any way officially associated with the South African Department of Home Affairs (DHA)</strong> or any other government institution.</p>
+      <p>The algorithms and specifications implemented on this website are based on public, open mathematical standards and historical DHA formatting conventions. IdentityZA verifies algorithmic and structural validity; it does not access or alter official government population registers.</p>
+    </article>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-col">
+          <h4>IdentityZA</h4>
+          <p>An open-source South African National Identity validation tool and comprehensive knowledge resource designed for accuracy, speed, and 100% client-side privacy.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Tools & Guides</h4>
+          <ul>
+            <li><a href="index.html#validator">ID Validator Tool</a></li>
+            <li><a href="index.html#how-it-works">ID Number Structure</a></li>
+            <li><a href="index.html#luhn-algorithm">Luhn Algorithm Guide</a></li>
+            <li><a href="index.html#security-guide">ID Security & Fraud</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Trust & Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="about.html">About the Project</a></li>
+            <li><a href="contact.html">Contact & Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Official Disclaimer</h4>
+          <p>IdentityZA is an independent open-source utility and is not affiliated, endorsed, or connected with the South African Department of Home Affairs (DHA) or any government agency.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 IdentityZA. Built with standard C++ and modern web standards.</p>
+        <p><a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
