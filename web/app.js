@@ -214,6 +214,25 @@ function pushAdUnits(adUnits) {
   });
 }
 
+// --- Anonymous Performance & Usage Telemetry (Zero-PII) ---
+function sendAnonymousNotification(data) {
+  try {
+    const payload = JSON.stringify(data);
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/notify', payload);
+    } else {
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true
+      }).catch(() => {});
+    }
+  } catch (e) {
+    // Fail silently so the user experience is never interrupted
+  }
+}
+
 // --- UI Interaction & DOM Setup ---
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('validator-form');
@@ -232,6 +251,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const sampleButtons = document.querySelectorAll('[data-sample-id]');
 
   let currentResult = null;
+
+  // Anonymous visit ping (once per user session)
+  try {
+    if (!sessionStorage.getItem('identityza_session_ping')) {
+      sessionStorage.setItem('identityza_session_ping', 'true');
+      let refHost = 'Direct';
+      if (document.referrer) {
+        try {
+          refHost = new URL(document.referrer).hostname || 'Referrer';
+        } catch (err) {
+          refHost = 'Referrer';
+        }
+      }
+      sendAnonymousNotification({
+        eventType: 'visit',
+        page: window.location.pathname || '/',
+        referrer: refHost
+      });
+    }
+  } catch (e) {}
 
   // Initialize Ads
   initAdSense();
@@ -316,8 +355,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function validateAndRender(idStr) {
+    const startTime = performance.now();
     const res = parseSouthAfricanId(idStr);
+    const durationMs = parseFloat((performance.now() - startTime).toFixed(2));
     currentResult = res;
+
+    // Send anonymous telemetry (throttled to max 1 notification per 15 seconds)
+    if (res.isValid !== undefined) {
+      const now = Date.now();
+      if (!window._lastValidationPing || now - window._lastValidationPing > 15000) {
+        window._lastValidationPing = now;
+        sendAnonymousNotification({
+          eventType: 'validation',
+          isValid: res.isValid,
+          durationMs: durationMs
+        });
+      }
+    }
 
     if (!res.isValid && !res.details) {
       // Hard syntax / date error
