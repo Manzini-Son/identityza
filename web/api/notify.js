@@ -31,6 +31,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid or missing eventType' });
     }
 
+    // Defensive input sanitization and length bounds
+    const safePage = (typeof page === 'string' ? page.trim().slice(0, 100) : '/') || '/';
+    const safeReferrer = (typeof referrer === 'string' ? referrer.trim().slice(0, 100) : 'Direct / None') || 'Direct / None';
+    const safeIsValid = Boolean(isValid);
+    const safeDurationMs = (typeof durationMs === 'number' && !isNaN(durationMs)) ? Math.max(0, Math.min(60000, Math.round(durationMs))) : null;
+
     // Extract Edge metadata provided automatically by Vercel
     const country = req.headers['x-vercel-ip-country'] || 'Unknown';
     const city = req.headers['x-vercel-ip-city'] ? decodeURIComponent(req.headers['x-vercel-ip-city']) : '';
@@ -70,11 +76,11 @@ export default async function handler(req, res) {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b;"><strong>Page:</strong></td>
-                <td style="padding: 8px 0;"><code>${escapeHtml(page || '/')}</code></td>
+                <td style="padding: 8px 0;"><code>${escapeHtml(safePage)}</code></td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b;"><strong>Referrer:</strong></td>
-                <td style="padding: 8px 0;">${escapeHtml(referrer || 'Direct / None')}</td>
+                <td style="padding: 8px 0;">${escapeHtml(safeReferrer)}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b;"><strong>Location:</strong></td>
@@ -97,10 +103,10 @@ export default async function handler(req, res) {
         </div>
       `;
     } else if (eventType === 'validation') {
-      const statusText = isValid ? 'Valid Luhn Checksum' : 'Invalid Checksum';
-      const statusColor = isValid ? '#10b981' : '#ef4444';
+      const statusText = safeIsValid ? 'Valid Luhn Checksum' : 'Invalid Checksum';
+      const statusColor = safeIsValid ? '#10b981' : '#ef4444';
 
-      subject = `⚡ IdentityZA: ID Validated (${isValid ? 'Valid' : 'Invalid'}) • ${durationMs}ms`;
+      subject = `⚡ IdentityZA: ID Validated (${safeIsValid ? 'Valid' : 'Invalid'}) • ${safeDurationMs !== null ? `${safeDurationMs}ms` : 'instant'}`;
       emailHtml = `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
           <div style="background-color: #0f172a; padding: 20px; color: #ffffff;">
@@ -119,7 +125,7 @@ export default async function handler(req, res) {
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b;"><strong>Parsing Speed:</strong></td>
-                <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">⚡ ${durationMs !== undefined ? `${durationMs} ms` : 'N/A'}</td>
+                <td style="padding: 8px 0; font-weight: 600; color: #0f172a;">⚡ ${safeDurationMs !== null ? `${safeDurationMs} ms` : 'N/A'}</td>
               </tr>
               <tr>
                 <td style="padding: 8px 0; color: #64748b;"><strong>Location:</strong></td>

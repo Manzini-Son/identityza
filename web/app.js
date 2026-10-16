@@ -12,7 +12,9 @@ function parseSouthAfricanId(idNumber) {
   if (!/^\d{13}$/.test(sanitized)) {
     return {
       isValid: false,
-      error: 'ID number must contain exactly 13 digits without spaces or symbols.',
+      error: sanitized.length === 0
+        ? 'Please enter a 13-digit South African ID number.'
+        : 'ID number must contain exactly 13 digits without spaces or symbols.',
       details: null
     };
   }
@@ -278,13 +280,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render initial history
   renderHistory();
 
-  // Sample ID quick-fill buttons
+  // Sample ID quick-fill buttons (fills input field and waits for user to press validate)
   sampleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const sampleId = btn.getAttribute('data-sample-id');
       idInput.value = sampleId;
+      hideResults();
+      idInput.removeAttribute('aria-invalid');
       idInput.focus();
-      validateAndRender(sampleId);
     });
   });
 
@@ -296,18 +299,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   idInput.addEventListener('blur', () => syncAria(idInput));
   idInput.addEventListener('input', () => {
-    // Only allow numeric input
+    // Only allow numeric input: strip any non-digit characters (preventing SQL injection payloads)
     idInput.value = idInput.value.replace(/\D/g, '').slice(0, 13);
-    if (idInput.hasAttribute('aria-invalid')) syncAria(idInput);
-
-    if (idInput.value.length === 13) {
-      validateAndRender(idInput.value);
-    } else {
-      hideResults();
+    if (idInput.hasAttribute('aria-invalid')) {
+      idInput.removeAttribute('aria-invalid');
     }
+    // Always hide results while user is typing/entering an ID number (waits for validate button)
+    hideResults();
   });
 
-  // Form submission
+  // Form submission: validates only when user clicks "Validate ID Number" or presses Enter
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     validateAndRender(idInput.value);
@@ -378,9 +379,11 @@ document.addEventListener('DOMContentLoaded', () => {
       errorMsg.textContent = res.error;
       errorMsg.style.display = 'block';
       resultCard.style.display = 'none';
+      idInput.setAttribute('aria-invalid', 'true');
       return;
     }
 
+    idInput.removeAttribute('aria-invalid');
     errorMsg.style.display = 'none';
     resultCard.style.display = 'block';
 
@@ -444,12 +447,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </li>
     `).join('');
 
-    // Re-bind click on history item to fill input
+    // Re-bind click on history item to fill input and wait for validate
     historyList.querySelectorAll('.history-item').forEach(item => {
       item.addEventListener('click', () => {
         const idVal = item.getAttribute('data-id');
         idInput.value = idVal;
-        validateAndRender(idVal);
+        hideResults();
+        idInput.removeAttribute('aria-invalid');
+        idInput.focus();
       });
     });
   }
